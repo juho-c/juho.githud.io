@@ -20,8 +20,19 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #000000;
+            color: #1a1a1a;
             background-color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        /* ===== CSS 변수 (비비드 컬러풀 테마) ===== */
+        :root {
+            --color-pink: #FF6B9D;
+            --color-purple: #C879FF;
+            --color-blue: #4D96FF;
+            --color-yellow: #FFD93D;
+            --color-dark: #1a1a1a;
+            --color-light: #f8f9fa;
         }
 
         /* ===== 네비게이션 바 ===== */
@@ -29,19 +40,15 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: #FFFFFF;
-            border-bottom: 1px solid #E0E0E0;
-            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
             z-index: 1000;
-            transition: box-shadow 0.3s ease;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
         nav .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -49,33 +56,36 @@
         }
 
         nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #000000;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
         }
 
         nav .logo:hover {
-            opacity: 0.7;
+            transform: scale(1.1) rotate(-5deg);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         nav ul li a {
-            color: #000000;
+            color: var(--color-dark);
             text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s ease;
+            font-weight: 700;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         nav ul li a:hover {
-            opacity: 0.7;
+            color: var(--color-pink);
+            transform: translateY(-3px);
         }
 
         nav ul li a::after {
@@ -84,9 +94,10 @@
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 2px;
-            background-color: #000000;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-pink), var(--color-purple));
             transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
         nav ul li a:hover::after {
@@ -96,15 +107,23 @@
         /* 모바일 메뉴 버튼 */
         .mobile-menu-btn {
             display: none;
-            background: none;
+            background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
             border: none;
+            color: white;
             font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        /* ===== 공통 컨테이너 스타일 ===== */
+        .mobile-menu-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* ===== 공통 스타일 ===== */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -116,131 +135,216 @@
             align-items: center;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #000000;
-            margin: 1rem auto 0;
-        }
-
-        /* ===== 히어로 섹션 ===== */
+        /* ===== 히어로 섹션 (매거진 스타일) ===== */
         #hero {
-            background-color: #000000;
-            color: #FFFFFF;
-            text-align: center;
+            background: linear-gradient(135deg, var(--color-pink) 0%, var(--color-purple) 50%, var(--color-blue) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        #hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
         }
 
-        #hero .subtitle {
-            font-size: 1.5rem;
-            color: #808080;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
+        #hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
         }
 
-        #hero .description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        #hero .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background-color: #FFFFFF;
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid #FFFFFF;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        #hero .cta-button:hover {
-            background-color: transparent;
-            color: #FFFFFF;
-            transform: translateY(-2px);
-        }
-
-        /* ===== About 섹션 ===== */
-        #about .content {
+        .hero-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
-        #about .profile2-image {
+        .hero-text h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .hero-text .name-en {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .hero-text .job {
+            font-size: 2rem;
+            font-weight: 700;
+            background: white;
+            color: var(--color-purple);
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 1s ease-out 0.4s both;
+        }
+
+        .hero-text .intro {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.6s both;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: bounceIn 1s ease-out 0.8s both;
+        }
+
+        .hero-image img {
             width: 100%;
-            max-width: 300px;
-            aspect-ratio: 1;
+            max-width: 400px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #000000;
+            border: 10px solid white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--color-purple);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== About 섹션 (비대칭 매거진 레이아웃) ===== */
+        #about {
+            background: var(--color-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-title {
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
 
-        #about .profile2-image:hover {
-            transform: scale(1.05);
+        .about-content:hover {
+            transform: translateY(-10px);
         }
 
-        #about .text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+        .about-content h3 {
+            font-size: 2.5rem;
+            color: var(--color-pink);
+            margin-bottom: 1.5rem;
         }
 
-        #about .text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333333;
-            margin-bottom: 1rem;
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 1.5rem;
         }
 
-        /* ===== Skills 섹션 ===== */
-        #skills {
-            background-color: #F5F5F5;
+        /* ===== Skills 섹션 (매거진 그리드) ===== */
+        .skills-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--color-yellow), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
         .skill-card {
-            background-color: #FFFFFF;
-            padding: 2rem;
-            border: 1px solid #E0E0E0;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-pink), var(--color-purple), var(--color-blue), var(--color-yellow));
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-15px) rotate(-2deg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-purple);
         }
 
         .skill-card ul {
@@ -248,167 +352,265 @@
         }
 
         .skill-card ul li {
-            padding: 0.5rem 0;
-            color: #333333;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #333;
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
+            transition: all 0.3s ease;
         }
 
         .skill-card ul li::before {
-            content: '▪';
+            content: '●';
             position: absolute;
             left: 0;
+            color: var(--color-pink);
+            font-size: 1.5rem;
         }
 
-        /* ===== Projects 섹션 ===== */
+        .skill-card ul li:hover {
+            transform: translateX(10px);
+            color: var(--color-pink);
+        }
+
+        /* ===== Projects 섹션 (매거진 비대칭 레이아웃) ===== */
+        #projects {
+            background: var(--color-light);
+        }
+
+        .projects-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 3rem;
         }
 
         .project-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E0E0E0;
+            background: white;
+            border-radius: 30px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-20px) rotate(3deg);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card:nth-child(even) {
+            transform: translateY(3rem);
+        }
+
+        .project-card:nth-child(even):hover {
+            transform: translateY(1rem) rotate(-3deg);
         }
 
         .project-card img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .project-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
-        .project-card .content {
-            padding: 1.5rem;
+        .project-content {
+            padding: 2rem;
         }
 
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .project-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-dark);
         }
 
-        .project-card .tags {
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
-        .project-card .tag {
-            padding: 0.3rem 0.8rem;
-            background-color: #000000;
-            color: #FFFFFF;
-            font-size: 0.85rem;
+        .project-tag {
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.3s ease;
         }
 
-        .project-card p {
-            color: #666666;
-            line-height: 1.6;
+        .project-tag:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .project-content p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1rem;
         }
 
         /* ===== Contact 섹션 ===== */
         #contact {
-            background-color: #000000;
-            color: #FFFFFF;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-purple) 100%);
+            color: white;
             text-align: center;
         }
 
-        #contact .section-title::after {
-            background-color: #FFFFFF;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        .contact-title {
+            font-size: 4rem;
+            font-weight: 900;
             margin-bottom: 3rem;
         }
 
-        .contact-item {
-            font-size: 1.3rem;
+        .contact-info {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .contact-item a {
-            color: #FFFFFF;
+        .contact-email {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
         }
 
-        .contact-item a:hover {
-            opacity: 0.7;
+        .contact-email:hover {
+            background: white;
+            color: var(--color-purple);
+            transform: scale(1.1) rotate(-3deg);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
-        .social-links a {
-            color: #FFFFFF;
-            font-size: 1.5rem;
-            text-decoration: none;
-            padding: 1rem;
-            border: 2px solid #FFFFFF;
-            width: 60px;
-            height: 60px;
+        .social-link {
+            width: 80px;
+            height: 80px;
+            background: white;
+            color: var(--color-purple);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .social-links a:hover {
-            background-color: #FFFFFF;
-            color: #000000;
-            transform: translateY(-5px);
+        .social-link:hover {
+            transform: translateY(-10px) scale(1.2) rotate(360deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         /* ===== Footer ===== */
         footer {
-            background-color: #000000;
-            color: #808080;
+            background: var(--color-dark);
+            color: white;
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid #333333;
         }
 
         footer a {
-            color: #FFFFFF;
+            color: var(--color-yellow);
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
 
         footer a:hover {
-            opacity: 0.7;
+            color: var(--color-pink);
+            transform: scale(1.1);
         }
 
         /* ===== 애니메이션 ===== */
-        @keyframes fadeInUp {
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                transform: scale(1.05) translateY(10px);
+            }
+            70% {
+                transform: scale(0.9) translateY(-5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateX(-50px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
             }
         }
 
         /* ===== 반응형 디자인 ===== */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .about-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-title {
+                writing-mode: horizontal-tb;
+                transform: none;
+                font-size: 4rem;
+                margin-bottom: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card:nth-child(even) {
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 768px) {
             nav ul {
                 display: none;
@@ -417,9 +619,9 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: #FFFFFF;
+                background: white;
                 padding: 1rem;
-                border-bottom: 1px solid #E0E0E0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             }
 
             nav ul.active {
@@ -430,46 +632,35 @@
                 display: block;
             }
 
-            #hero h1 {
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text .job {
+                font-size: 1.5rem;
+            }
+
+            .hero-text .intro {
+                font-size: 1.1rem;
+            }
+
+            .skills-title,
+            .projects-title,
+            .contact-title {
                 font-size: 2.5rem;
             }
 
-            #hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            #hero .description {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            #about .content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            #about .profile2-image {
-                margin: 0 auto;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .social-links {
-                flex-wrap: wrap;
+            .about-title {
+                font-size: 2.5rem;
             }
 
             section {
                 padding: 4rem 0;
                 min-height: auto;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
             }
         }
 
@@ -482,12 +673,14 @@
                 padding: 0 1rem;
             }
 
-            #hero h1 {
-                font-size: 2rem;
+            .hero-text h1 {
+                font-size: 2.5rem;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            .skills-title,
+            .projects-title,
+            .contact-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -496,7 +689,7 @@
     <!-- 네비게이션 -->
     <nav id="navbar">
         <div class="container">
-            <a href="#hero" class="logo">JH</a>
+            <div class="logo">JH</div>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul id="nav-menu">
                 <li><a href="#about">About</a></li>
@@ -510,32 +703,41 @@
     <!-- 히어로 섹션 -->
     <section id="hero">
         <div class="container">
-            <h1>최주호</h1>
-            <p class="subtitle">Choi Ju Ho</p>
-            <p class="description">한량</p>
-            <p class="description">적당히 잘 살아갈 예정임.</p>
-            <a href="#about" class="cta-button">더 알아보기</a>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>최주호</h1>
+                    <div class="name-en">cHoi juHo</div>
+                    <div class="job">한량</div>
+                    <p class="intro">적당히 잘 살아갈 예정임.<br>걱정ㄴㄴ</p>
+                    <a href="#about" class="cta-button">더 알아보기</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/profile1.png" alt="최주호 프로필">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About 섹션 -->
     <section id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="content">
-                <img src="https://via.placeholder.com/300" alt="최주호 프로필 사진" class="profile2-image">
-                <div class="text">
-                    <h3>안녕하세요, 최주호입니다.</h3>
+            <div class="about-grid">
+                <div class="about-title">ABOUT</div>
+                <div class="about-content">
+                    <h3>안녕하세요! 👋</h3>
                     <p>
-                        저는 삶의 균형을 중요하게 생각하는 사람입니다. 
-                        일과 여가, 성장과 휴식 사이에서 적절한 조화를 찾아가며 살아가고 있습니다.
+                        저는 최주호입니다. 인생은 너무 진지하게 살 필요 없다고 생각하는 사람이에요.
                     </p>
                     <p>
-                        완벽함보다는 지속 가능함을, 과도한 욕심보다는 만족스러운 현재를 추구합니다.
-                        인생은 마라톤이 아닌 산책이라고 생각하며, 천천히 그러나 꾸준히 나아가고 있습니다.
+                        "적당히"라는 말을 좋아합니다. 적당히 열심히, 적당히 게으름 피우고, 
+                        적당히 즐기면서 살아가는 것이 제 모토입니다.
                     </p>
                     <p>
-                        새로운 경험과 배움을 즐기며, 제 속도로 성장해나가는 것을 목표로 하고 있습니다.
+                        걱정은 인생의 낭비라고 생각해요. 그래서 걱정ㄴㄴ! 
+                        오늘도 편안하게, 내일도 편안하게 살아갈 예정입니다.
+                    </p>
+                    <p>
+                        삶의 균형을 찾고, 스트레스 없이 즐겁게 사는 것이 제일 중요하다고 믿습니다. 💫
                     </p>
                 </div>
             </div>
@@ -545,42 +747,42 @@
     <!-- Skills 섹션 -->
     <section id="skills">
         <div class="container">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="skills-title">SKILLS</h2>
             <div class="skills-grid">
                 <div class="skill-card">
                     <h3>🎨 Creative</h3>
                     <ul>
-                        <li>Design Thinking</li>
-                        <li>Visual Communication</li>
-                        <li>Content Creation</li>
-                        <li>Storytelling</li>
+                        <li>적당히 창의적인 사고</li>
+                        <li>스트레스 없는 아이디어</li>
+                        <li>편안한 콘텐츠 제작</li>
+                        <li>자유로운 표현</li>
                     </ul>
                 </div>
                 <div class="skill-card">
                     <h3>💻 Technical</h3>
                     <ul>
-                        <li>Web Development</li>
-                        <li>UI/UX Design</li>
-                        <li>Digital Tools</li>
-                        <li>Problem Solving</li>
+                        <li>필요한 만큼만 코딩</li>
+                        <li>실용적인 디자인</li>
+                        <li>효율적인 작업</li>
+                        <li>간단한 문제 해결</li>
                     </ul>
                 </div>
                 <div class="skill-card">
                     <h3>🤝 Soft Skills</h3>
                     <ul>
-                        <li>Communication</li>
-                        <li>Collaboration</li>
-                        <li>Adaptability</li>
-                        <li>Time Management</li>
+                        <li>편안한 커뮤니케이션</li>
+                        <li>여유로운 협업</li>
+                        <li>유연한 적응력</li>
+                        <li>적절한 시간 관리</li>
                     </ul>
                 </div>
                 <div class="skill-card">
-                    <h3>🌱 Personal</h3>
+                    <h3>🌱 Life Balance</h3>
                     <ul>
-                        <li>Self-motivation</li>
-                        <li>Continuous Learning</li>
-                        <li>Work-Life Balance</li>
-                        <li>Mindfulness</li>
+                        <li>적당히 열심히</li>
+                        <li>즐기면서 배우기</li>
+                        <li>워라밸 최우선</li>
+                        <li>긍정적 마인드</li>
                     </ul>
                 </div>
             </div>
@@ -590,61 +792,62 @@
     <!-- Projects 섹션 -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="projects-title">PROJECTS</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/000000/FFFFFF?text=Project+1" alt="프로젝트 1">
-                    <div class="content">
-                        <h3>균형 찾기 프로젝트</h3>
-                        <div class="tags">
-                            <span class="tag">Life</span>
-                            <span class="tag">Balance</span>
+                    <img src="images/project1.png" alt="프로젝트 1">
+                    <div class="project-content">
+                        <h3>적당히 살기 프로젝트</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Life</span>
+                            <span class="project-tag">Balance</span>
                         </div>
                         <p>
-                            일과 삶의 균형을 찾아가는 여정을 기록하고 공유하는 프로젝트입니다. 
-                            실제 경험을 바탕으로 지속 가능한 라이프스타일을 연구합니다.
+                            너무 열심히도, 너무 게으르지도 않게. 
+                            딱 적당한 삶의 방식을 찾아가는 프로젝트입니다. 
+                            걱정 없이 편안하게!
                         </p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/333333/FFFFFF?text=Project+2" alt="프로젝트 2">
-                    <div class="content">
-                        <h3>느린 성장 일기</h3>
-                        <div class="tags">
-                            <span class="tag">Growth</span>
-                            <span class="tag">Journal</span>
+                    <img src="images/project2.png" alt="프로젝트 2">
+                    <div class="project-content">
+                        <h3>걱정ㄴㄴ 라이프</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Mindset</span>
+                            <span class="project-tag">Chill</span>
                         </div>
                         <p>
-                            빠른 성공보다 꾸준한 성장을 기록하는 프로젝트입니다. 
-                            작은 변화들이 모여 큰 발전을 만들어가는 과정을 담았습니다.
+                            걱정은 시간 낭비! 긍정적이고 편안한 마음가짐으로 
+                            하루하루를 즐기는 방법을 공유합니다.
                         </p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/666666/FFFFFF?text=Project+3" alt="프로젝트 3">
-                    <div class="content">
-                        <h3>적당히 살기 가이드</h3>
-                        <div class="tags">
-                            <span class="tag">Lifestyle</span>
-                            <span class="tag">Guide</span>
+                    <img src="images/project3.png" alt="프로젝트 3">
+                    <div class="project-content">
+                        <h3>여유로운 취미생활</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Hobby</span>
+                            <span class="project-tag">Fun</span>
                         </div>
                         <p>
-                            과도한 욕심 없이 만족스러운 삶을 살아가는 방법을 정리한 가이드입니다. 
-                            실용적이고 현실적인 접근을 추구합니다.
+                            부담 없이 즐기는 다양한 취미 활동들. 
+                            스트레스 받지 않고 순수하게 재미있는 것들을 찾아서!
                         </p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250/999999/000000?text=Project+4" alt="프로젝트 4">
-                    <div class="content">
-                        <h3>취미 탐험 기록</h3>
-                        <div class="tags">
-                            <span class="tag">Hobby</span>
-                            <span class="tag">Experience</span>
+                    <img src="images/project4.png" alt="프로젝트 4">
+                    <div class="project-content">
+                        <h3>편안한 일상 기록</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Daily</span>
+                            <span class="project-tag">Record</span>
                         </div>
                         <p>
-                            다양한 취미를 경험하고 그 과정을 기록하는 프로젝트입니다. 
-                            새로운 것을 시도하는 용기와 즐거움을 공유합니다.
+                            특별하지 않아도 괜찮은 일상들. 
+                            평범하지만 행복한 순간들을 기록하고 소중히 여깁니다.
                         </p>
                     </div>
                 </div>
@@ -655,20 +858,14 @@
     <!-- Contact 섹션 -->
     <section id="contact">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <p>📧 Email: <a href="mailto:juho@example.com">juho@example.com</a></p>
-                </div>
-                <div class="contact-item">
-                    <p>언제든지 편하게 연락주세요!</p>
-                </div>
-            </div>
+            <h2 class="contact-title">CONTACT</h2>
+            <p class="contact-info">편하게 연락주세요! 😊</p>
+            <a href="mailto:juho@example.com" class="contact-email">juho@example.com</a>
             <div class="social-links">
-                <a href="https://github.com" target="_blank" title="GitHub">GH</a>
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn">LI</a>
-                <a href="https://twitter.com" target="_blank" title="Twitter">TW</a>
-                <a href="https://instagram.com" target="_blank" title="Instagram">IG</a>
+                <a href="https://github.com" target="_blank" class="social-link">GH</a>
+                <a href="https://linkedin.com" target="_blank" class="social-link">LI</a>
+                <a href="https://twitter.com" target="_blank" class="social-link">TW</a>
+                <a href="https://instagram.com" target="_blank" class="social-link">IG</a>
             </div>
         </div>
     </section>
@@ -679,16 +876,6 @@
     </footer>
 
     <script>
-        // 네비게이션 스크롤 효과
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
         // 모바일 메뉴 토글
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
@@ -696,35 +883,4 @@
         }
 
         // 네비게이션 링크 클릭 시 모바일 메뉴 닫기
-        document.querySelectorAll('#nav-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                const navMenu = document.getElementById('nav-menu');
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // 스크롤 시 요소 페이드인 효과
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // 관찰할 요소들 설정
-        document.querySelectorAll('.skill-card, .project-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+        document.querySelectorAll('#nav-menu a').forEach(link =>

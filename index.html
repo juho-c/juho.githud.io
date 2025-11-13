@@ -3,118 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>최주호 - 포트폴리오</title>
+    <meta name="description" content="최주호의 포트폴리오 웹사이트">
+    <title>최주호 - Portfolio</title>
     <style>
+        /* ===== 기본 리셋 및 설정 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background-color: #FFFFFF;
+        }
+
+        /* ===== 네비게이션 바 ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        nav .logo:hover {
+            opacity: 0.7;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            opacity: 0.7;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #000000;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* 모바일 메뉴 버튼 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== 공통 컨테이너 스타일 ===== */
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
             text-align: center;
-            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #000000;
+            margin: 1rem auto 0;
+        }
+
+        /* ===== 히어로 섹션 ===== */
+        #hero {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             animation: fadeInUp 1s ease-out;
         }
 
-        .profile-img {
-            width: 200px;
-            height: 200px;
+        #hero .subtitle {
+            font-size: 1.5rem;
+            color: #808080;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        #hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        #hero .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: #FFFFFF;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #FFFFFF;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        #hero .cta-button:hover {
+            background-color: transparent;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        /* ===== About 섹션 ===== */
+        #about .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        #about .profile-image {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-            animation: fadeIn 0.8s ease-out;
+            border: 5px solid #000000;
+            transition: transform 0.3s ease;
         }
 
-        h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.8s ease-out 0.2s both;
+        #about .profile-image:hover {
+            transform: scale(1.05);
         }
 
-        p {
+        #about .text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        #about .text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333333;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== Skills 섹션 ===== */
+        #skills {
+            background-color: #F5F5F5;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            border: 1px solid #E0E0E0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card h3 {
             font-size: 1.5rem;
-            font-weight: 300;
-            opacity: 0.95;
-            letter-spacing: 1px;
-            animation: slideIn 0.8s ease-out 0.4s both;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .decoration {
-            width: 100px;
-            height: 3px;
-            background: white;
-            margin: 2rem auto;
-            border-radius: 2px;
-            animation: expand 0.8s ease-out 0.6s both;
+        .skill-card ul {
+            list-style: none;
         }
 
-        /* 배경 애니메이션 효과 */
-        .circle {
+        .skill-card ul li {
+            padding: 0.5rem 0;
+            color: #333333;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-card ul li::before {
+            content: '▪';
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 20s infinite ease-in-out;
+            left: 0;
         }
 
-        .circle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        /* ===== Projects 섹션 ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
         }
 
-        .circle:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 70%;
-            left: 80%;
-            animation-delay: 2s;
+        .project-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .circle:nth-child(3) {
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card .content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .project-card .tag {
+            padding: 0.3rem 0.8rem;
+            background-color: #000000;
+            color: #FFFFFF;
+            font-size: 0.85rem;
+        }
+
+        .project-card p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* ===== Contact 섹션 ===== */
+        #contact {
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        #contact .section-title::after {
+            background-color: #FFFFFF;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            font-size: 1.3rem;
+        }
+
+        .contact-item a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            text-decoration: none;
+            padding: 1rem;
+            border: 2px solid #FFFFFF;
             width: 60px;
             height: 60px;
-            top: 80%;
-            left: 15%;
-            animation-delay: 4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .circle:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 85%;
-            animation-delay: 6s;
+        .social-links a:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+            transform: translateY(-5px);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        /* ===== Footer ===== */
+        footer {
+            background-color: #000000;
+            color: #808080;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #333333;
         }
 
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.7;
+        }
+
+        /* ===== 애니메이션 ===== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -126,59 +408,323 @@
             }
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes expand {
-            from {
-                width: 0;
-                opacity: 0;
-            }
-            to {
-                width: 100px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                transform: translateY(-30px) translateX(30px);
-            }
-        }
-
+        /* ===== 반응형 디자인 ===== */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #FFFFFF;
+                padding: 1rem;
+                border-bottom: 1px solid #E0E0E0;
             }
-            p {
-                font-size: 1.1rem;
-                padding: 0 2rem;
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            #hero .description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            #about .content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            #about .profile-image {
+                margin: 0 auto;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+
+            section {
+                padding: 4rem 0;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    
-    <div class="container">
-        <img src="images/profile2.png" alt="최주호 프로필 사진" class="profile-img">
-        <h1>최주호</h1>
-        <div class="decoration"></div>
-        <p>포트폴리오 웹사이트에 오신 것을 환영합니다</p>
-    </div>
+    <!-- 네비게이션 -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">JH</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section id="hero">
+        <div class="container">
+            <h1>최주호</h1>
+            <p class="subtitle">Choi Ju Ho</p>
+            <p class="description">한량</p>
+            <p class="description">적당히 잘 살아갈 예정임.</p>
+            <a href="#about" class="cta-button">더 알아보기</a>
+        </div>
+    </section>
+
+    <!-- About 섹션 -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="content">
+                <img src="https://via.placeholder.com/300" alt="최주호 프로필 사진" class="profile-image">
+                <div class="text">
+                    <h3>안녕하세요, 최주호입니다.</h3>
+                    <p>
+                        저는 삶의 균형을 중요하게 생각하는 사람입니다. 
+                        일과 여가, 성장과 휴식 사이에서 적절한 조화를 찾아가며 살아가고 있습니다.
+                    </p>
+                    <p>
+                        완벽함보다는 지속 가능함을, 과도한 욕심보다는 만족스러운 현재를 추구합니다.
+                        인생은 마라톤이 아닌 산책이라고 생각하며, 천천히 그러나 꾸준히 나아가고 있습니다.
+                    </p>
+                    <p>
+                        새로운 경험과 배움을 즐기며, 제 속도로 성장해나가는 것을 목표로 하고 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills 섹션 -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🎨 Creative</h3>
+                    <ul>
+                        <li>Design Thinking</li>
+                        <li>Visual Communication</li>
+                        <li>Content Creation</li>
+                        <li>Storytelling</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>💻 Technical</h3>
+                    <ul>
+                        <li>Web Development</li>
+                        <li>UI/UX Design</li>
+                        <li>Digital Tools</li>
+                        <li>Problem Solving</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🤝 Soft Skills</h3>
+                    <ul>
+                        <li>Communication</li>
+                        <li>Collaboration</li>
+                        <li>Adaptability</li>
+                        <li>Time Management</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🌱 Personal</h3>
+                    <ul>
+                        <li>Self-motivation</li>
+                        <li>Continuous Learning</li>
+                        <li>Work-Life Balance</li>
+                        <li>Mindfulness</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects 섹션 -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x250/000000/FFFFFF?text=Project+1" alt="프로젝트 1">
+                    <div class="content">
+                        <h3>균형 찾기 프로젝트</h3>
+                        <div class="tags">
+                            <span class="tag">Life</span>
+                            <span class="tag">Balance</span>
+                        </div>
+                        <p>
+                            일과 삶의 균형을 찾아가는 여정을 기록하고 공유하는 프로젝트입니다. 
+                            실제 경험을 바탕으로 지속 가능한 라이프스타일을 연구합니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x250/333333/FFFFFF?text=Project+2" alt="프로젝트 2">
+                    <div class="content">
+                        <h3>느린 성장 일기</h3>
+                        <div class="tags">
+                            <span class="tag">Growth</span>
+                            <span class="tag">Journal</span>
+                        </div>
+                        <p>
+                            빠른 성공보다 꾸준한 성장을 기록하는 프로젝트입니다. 
+                            작은 변화들이 모여 큰 발전을 만들어가는 과정을 담았습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x250/666666/FFFFFF?text=Project+3" alt="프로젝트 3">
+                    <div class="content">
+                        <h3>적당히 살기 가이드</h3>
+                        <div class="tags">
+                            <span class="tag">Lifestyle</span>
+                            <span class="tag">Guide</span>
+                        </div>
+                        <p>
+                            과도한 욕심 없이 만족스러운 삶을 살아가는 방법을 정리한 가이드입니다. 
+                            실용적이고 현실적인 접근을 추구합니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x250/999999/000000?text=Project+4" alt="프로젝트 4">
+                    <div class="content">
+                        <h3>취미 탐험 기록</h3>
+                        <div class="tags">
+                            <span class="tag">Hobby</span>
+                            <span class="tag">Experience</span>
+                        </div>
+                        <p>
+                            다양한 취미를 경험하고 그 과정을 기록하는 프로젝트입니다. 
+                            새로운 것을 시도하는 용기와 즐거움을 공유합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact 섹션 -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <p>📧 Email: <a href="mailto:juho@example.com">juho@example.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p>언제든지 편하게 연락주세요!</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com" target="_blank" title="GitHub">GH</a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn">LI</a>
+                <a href="https://twitter.com" target="_blank" title="Twitter">TW</a>
+                <a href="https://instagram.com" target="_blank" title="Instagram">IG</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 최주호. Powered by <a href="https://ai.triz.kr" target="_blank">AI Portfolio Workshop</a>.</p>
+    </footer>
+
+    <script>
+        // 네비게이션 스크롤 효과
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 모바일 메뉴 토글
+        function toggleMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // 네비게이션 링크 클릭 시 모바일 메뉴 닫기
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navMenu = document.getElementById('nav-menu');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // 스크롤 시 요소 페이드인 효과
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 관찰할 요소들 설정
+        document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
